@@ -3,9 +3,15 @@
 
 ---
 
+![inline](http://cl.ly/image/1E1R0v2T0o3I/bc-logo.jpg)
 ## Mark Llobrera
-### Bluecadet
 ### @dirtystylus
+### @bluecadet
+
+^ This talk is broken into three parts:
+* progressive enhancement overview
+* a case study
+* a short and simple demo
 
 ---
 
@@ -14,6 +20,8 @@
 ---
 
 # What is Progressive Enhancement?
+
+^ Progressive Enhancement is more of a philosophy than a technique.
 
 ---
 
@@ -47,18 +55,6 @@ http://alistapart.com/article/understandingprogressiveenhancement
 
 ---
 
-# “Support the many, optimize for the few.”
-
-\- Brad Frost
-
----
-
-![170%](images/m-m.jpg)
-<br>
-(*Image © A List Apart*)
-
----
-
 * Semantic HTML Markup
 
 ---
@@ -70,13 +66,18 @@ http://alistapart.com/article/understandingprogressiveenhancement
 
 ---
 
+# HTML and CSS
+## are fault-tolerant
+
+---
+
 * Semantic HTML Markup
 * CSS
 * JavaScript
 
 ---
 
-# JavaScript is not fault-tolerant
+# JavaScript is *not* fault-tolerant
 
 ---
 
@@ -86,6 +87,12 @@ http://alistapart.com/article/understandingprogressiveenhancement
 
 * giant expanse of nothing
 * menus don’t work
+
+---
+
+![170%](images/m-m.jpg)
+<br>
+(*Image © A List Apart*)
 
 ---
 
@@ -102,6 +109,10 @@ http://alistapart.com/article/understandingprogressiveenhancement
 ---
 
 ![100%](https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRMeRmwYKCq6vUZBSzjgT_ojsRwNJLw7U9QiF-7YRj5_ZW8yEHllQ)
+
+---
+
+![140%](https://33.media.tumblr.com/157b3a4c13f0b4c167b1bdb05d8ef315/tumblr_mopu2fc9Ss1rkg2f4o1_250.gif)
 
 ---
 
@@ -165,25 +176,6 @@ Photo by Grant Hutchinson: https://www.flickr.com/photos/splorp/6141775264/in/se
 
 ---
 
-# “Device Agnostic”
-\- by Trent Walton 
-
-http://trentwalton.com/2014/03/10/device-agnostic/
-
----
-
-> As web designers, it is our role to consider (and plan for) maximum reach and access
-
----
-
-> even when final results might seem underwhelming or less immersive.
-
----
-
-# You are not (necessarily) your audience.
-
----
-
 # Some Scenarios
 
 ---
@@ -208,27 +200,6 @@ http://trentwalton.com/2014/03/10/device-agnostic/
 ---
 
 # Techniques
-
----
-
-# “Cutting the Mustard”
-\- BBC Web Team
-* http://responsivenews.co.uk/post/18948466399/cutting-the-mustard
-* http://www.creativebloq.com/web-design/responsive-web-design-tips-bbc-news-9134667
-
-
----
-
-* Test for “feature browsers” vs “smart browsers”
-* Feature Detection, not Device Detection
-
-```javascript
-if('querySelector' in document
-     && 'localStorage' in window
-     && 'addEventListener' in window) {
-     // bootstrap the javascript application
-     }
-```
 
 ---
 
@@ -333,6 +304,9 @@ rel="bookmark">
 <?php print (render($content['field_display_title'])); ?>
 </h3></a>
 ```
+
+---
+
 ```html
 <a 
 data-interaction
@@ -358,80 +332,18 @@ https://github.com/filamentgroup/Ajax-Include-Pattern
 ```javascript
 Drupal.behaviors.computer_servicesLoadInstructionSet = {
     attach: function (context, settings) {
-      // By using the 'context' variable we make sure that our code only runs on
-      // the relevant HTML. Furthermore, by using jQuery.once() we make sure that
-      // we don't run the same piece of code for an HTML snippet that we already
-      // processed previously. By using .once('foo') all processed elements will
-      // get tagged with a 'foo-processed' class, causing all future invocations
-      // of this behavior to ignore them.
       $( "a[data-interaction]" ).once( "instructionajax", function() {
         $( "a[data-interaction]" ).unbind().bind( "click", function() {
-          //$('#three').effect('highlight', {}, 3000);
           $( this ).removeAttr( "data-interaction" ).ajaxInclude();
           $( this ).on( "ajaxInclude", function () {
-
-            window.picturefill();
-            var nodeId;
-            var flexsliderId;
-            var flexControlsId;
-            $(".flexslider").each( function () {
-              nodeId = $(this).attr("data-node");
-              flexsliderId = "#flexslider-"+nodeId;
-              flexControlsId = "#flex-controls-"+nodeId;
-
-              $(flexsliderId).flexslider({
-                animation: "slide",
-                slideshow: false,
-                prevText: "prev",
-                controlNav: false,
-                controlsContainer: flexControlsId,
-                start: function(slider) {
-                  var flexTotal = flexControlsId + ' .total-slides';
-                  slider.find('.total-slides').text(slider.count);
-                  $(slider).find(".flex-active-slide").attr('aria-hidden','false' );
-                },
-                after: function(slider) {
-                  var flexCurrent = flexControlsId + ' .current-slide';
-                  slider.find('.current-slide').text(slider.currentSlide+1);
-                  smoothHeight: true
-                  slider.find("li").attr('aria-hidden','true' );
-                  $(slider).find(".flex-active-slide").attr('aria-hidden','false' );
-                }
-              });
-            });
-
-            $('.all-steps').hide();
-            $('.steps-block .show-steps').click(function(){
-              $(this).parent().parent().parent().find('.all-steps').slideDown();
-              return false;
-            });
-            $('.steps-block .hide-steps').click(function(){
-              $(this).parent().parent().parent().find('.all-steps').slideUp();
-              return false;
-            });
-
-            $(this).parent().find('.node--instruction-list:not(:first)').fadeOut();
-
-            $('.tabs li:first-child a').addClass('active');
-
-            $('.tabs li a').click(function(){
-              $('.node--instruction-list').hide();
-              $('.tabs li a').removeClass('active');
-              $(this).addClass('active');
-
-              var blockId;
-              blockId = $(this).attr("href");
-
-              $(blockId).show();
-              return false;
-            });
+            // … do some things after load here
           });
           return false;
         });
       });
     }
   };
-
+  ```
 
 ---
 
@@ -457,7 +369,9 @@ function computer_services_preprocess_html(&$variables) {
 
 ---
 
-* Unordered List is progressively enhanced to an image slideshow
+# To recap:
+
+* A simple unordered List is progressively enhanced to an image slideshow
 * List is perfectly understandable content without JavaScript
 
 ---
@@ -474,6 +388,47 @@ function computer_services_preprocess_html(&$variables) {
 * Like mobile-first RWD, Progressive Enhancement is easier when you’re adding complexity gradually
 
 ---
+
+# Progressive Enhancement
+## is easier when you’re adding complexity *gradually*
+
+---
+
+# DEMO
+
+---
+
+# Conclusion
+
+* We want our content to reach the widest possible audience
+* We want to be able to scale the user’s experience to their device’s capabilities
+
+---
+
+# Conclusion 
+
+* Think of layers: HTML can be rendered/understood by almost everything
+* Layer on CSS for presentation
+* Layer on JavaScript as an enhancement
+* If you rely on JavaScript pause and ask why
+
+---
+
+## This is hard work, and it takes time to get it right.
+
+---
+
+# Thank you.
+
+---
+
+![inline](http://cl.ly/image/1E1R0v2T0o3I/bc-logo.jpg)
+## Mark Llobrera
+### @dirtystylus
+### @bluecadet
+
+---
+
 
 # Example:
 ## Lapham’s Quarterly
@@ -688,27 +643,5 @@ function loadEssaysView() {
 ^ In this situation we target the URL /views/ajax
 We pass in the view name, and the display id. Our success handler tells us where to put the response.
 
----
 
-# Conclusion
-
-* We want our content to reach the widest possible audience
-* We want to be able to scale the user’s experience to their device’s capabilities
-
----
-
-# Conclusion 
-
-* Think of layers: HTML can be rendered/understood by almost everything
-* Layer on CSS for presentation
-* Layer on JavaScript as an enhancement
-* If you rely on JavaScript pause and ask why
-
----
-
-## This is hard work, and it takes time to get it right.
-
----
-
-# Thank you.
 

@@ -5,8 +5,8 @@
 
 ![inline](http://cl.ly/image/1E1R0v2T0o3I/bc-logo.jpg)
 ## Mark Llobrera
-### @dirtystylus
-### @bluecadet
+### Senior Developer [@bluecadet](http://twitter.com/bluecadet)
+### [@dirtystylus](http://twitter.com/dirtystylus)
 
 ^ This talk is broken into three parts:
 * progressive enhancement overview
@@ -473,5 +473,5 @@ function computer_services_preprocess_html(&$variables) {
 
 ![inline](http://cl.ly/image/1E1R0v2T0o3I/bc-logo.jpg)
 ## Mark Llobrera
-### @dirtystylus
-### @bluecadet
+### [@bluecadet](http://twitter.com/bluecadet)
+### [@dirtystylus](http://twitter.com/dirtystylus)

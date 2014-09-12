@@ -464,7 +464,10 @@ function computer_services_preprocess_html(&$variables) {
 
 ---
 
+# Github
 
+* Presentation: https://github.com/dirtystylus/drupaldelphia-2014
+* Demo Site: https://github.com/dirtystylus/drupaldelphia-2014-demo
 
 ---
 

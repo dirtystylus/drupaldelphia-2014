@@ -25,6 +25,10 @@
 
 ---
 
+# Philosophy, not technique
+
+---
+
 # Content First
 
 ---
@@ -52,6 +56,12 @@ http://alistapart.com/article/understandingprogressiveenhancement
 
 # The same content for everybody.
 ## (Not necessarily the same experience.)
+
+^ Components
+
+---
+
+# Components
 
 ---
 
@@ -81,7 +91,7 @@ http://alistapart.com/article/understandingprogressiveenhancement
 
 ---
 
-![fit](images/fwa-nojs.jpg)
+![fit](http://cl.ly/image/183f340A4343/fwa-nojs.jpg)
 
 ---
 
@@ -90,7 +100,7 @@ http://alistapart.com/article/understandingprogressiveenhancement
 
 ---
 
-![170%](images/m-m.jpg)
+![170%](http://cl.ly/image/1X1r3i1U160A/m-m.jpg)
 <br>
 (*Image © A List Apart*)
 
@@ -139,9 +149,14 @@ http://alistapart.com/article/understandingprogressiveenhancement
 	
 ---
 
-![90%](images/boston-globe-newton.gif)
+![90%](http://cl.ly/image/1U3d0F451J20/boston-globe-newton.gif)
 <br>
 Photo by Grant Hutchinson: https://www.flickr.com/photos/splorp/6141775264/in/set-72157624225682388
+
+---
+
+##	BostonGlobe.com on 
+## *Apple Newton*
 
 ---
 
@@ -151,7 +166,7 @@ Photo by Grant Hutchinson: https://www.flickr.com/photos/splorp/6141775264/in/se
 
 ---
 
-![](images/apple-watch.jpg)
+![](http://cl.ly/image/3n1a2X3l0e30/apple-watch.jpg)
 
 ---
 
@@ -173,6 +188,7 @@ Photo by Grant Hutchinson: https://www.flickr.com/photos/splorp/6141775264/in/se
 	* Newer “Browsers”: game consoles, wearables
 	* Users of assistive devices: browsers for sight/mobility impaired users
 * Performance
+	* mobile (cell) networks
 
 ---
 
@@ -205,27 +221,27 @@ Photo by Grant Hutchinson: https://www.flickr.com/photos/splorp/6141775264/in/se
 
 # Ajax-Include Patterns
 
-“An Ajax-Include Pattern for Modular Content”
+[“An Ajax-Include Pattern for Modular Content”](http://filamentgroup.com/lab/ajax-includes-modular-content.html)
 *by The Filament Group*
 
-![inline](images/ajax-include-github.jpg)
+![inline](http://cl.ly/image/0g3G1n3E283V/ajax-include-github.jpg)
 
 ---
 
-* Lazy-load non-essential content: create hooks for content to target based on certain rules
-	* Hyperlinks to content can be enhanced to become excerpts
+* Lazy-load non-essential content: create **data attribute patterns** for JavaScript to target based on certain rules
+	* Hyperlinks to content can be enhanced
 * Load can be done in a staggered fashion, or on demand (click)
 
 ---
 
-# Pattern
+# No Pattern
 ```html
 <h2><a href="/path/to/content">Related Articles</a></h2>
 ```
 
 ---
 
-# Pattern
+# Data Attribute Pattern
 
 * data-before
 * data-after
@@ -234,7 +250,7 @@ Photo by Grant Hutchinson: https://www.flickr.com/photos/splorp/6141775264/in/se
 
 ---
 
-# Pattern
+# Data Attribute Pattern
 
 * data-before
 * data-after
@@ -269,11 +285,11 @@ href="/path/to/content">Related Articles</a></h2>
 
 ---
 
-![30%](images/tucs-article.jpg)
+![30%](http://cl.ly/image/3B0t111Y1t1R/tucs-article.jpg)
 
 ---
 
-![](images/tucs-article.jpg)
+![](http://cl.ly/image/3B0t111Y1t1R/tucs-article.jpg)
 
 ---
 
@@ -321,7 +337,7 @@ href="/topic/applicant">
 # How?
 ## JavaScript
 
-* Include *ajaxinclude.js*
+* Include *ajaxinclude.js* in theme **.info** file
  
 https://github.com/filamentgroup/Ajax-Include-Pattern
 
@@ -344,6 +360,8 @@ Drupal.behaviors.computer_servicesLoadInstructionSet = {
     }
   };
   ```
+  
+^ ajaxinclude.js has a callback event that can be used to do things after the load is complete, like animate a section
 
 ---
 
@@ -398,6 +416,26 @@ function computer_services_preprocess_html(&$variables) {
 
 ---
 
+# 1. Basic site
+
+---
+
+# 2. Site with ajaxinclude.js
+
+^ You can see we are loading the content but the header and footer are included
+
+---
+
+# 3. Site with ajaxinclude.js and template overrides
+
+^ But what about other things? How about a view?
+
+---
+
+# 4. Loading a view via Ajax
+
+---
+
 # Conclusion
 
 * We want our content to reach the widest possible audience
@@ -414,6 +452,10 @@ function computer_services_preprocess_html(&$variables) {
 
 ---
 
+# Don’t break the URL.
+
+---
+
 ## This is hard work, and it takes time to get it right.
 
 ---
@@ -422,226 +464,11 @@ function computer_services_preprocess_html(&$variables) {
 
 ---
 
+
+
+---
+
 ![inline](http://cl.ly/image/1E1R0v2T0o3I/bc-logo.jpg)
 ## Mark Llobrera
 ### @dirtystylus
 ### @bluecadet
-
----
-
-
-# Example:
-## Lapham’s Quarterly
-
-* Literary journal
-* “Sophisticated whimsy”
-
----
-
-# Random Artwork
-
----
-
-![fit](images/laphams-article.jpg)
-
----
-
-![fit](images/laphams-article-zoom.jpg)
-
----
-
-* Random artwork is not tied to essay (whimsy!) so it is not essential
-* If user does not have JavaScript, we do not display the image(s)
-* Image content is the progressive enhancement
-
----
-
-# Solution
-
-* Theme functions to run query for the set of available artwork
-* Query results written out as JavaScript arrays
-* JavaScript runs and looks for markup patterns to replace with artwork
-* Custom node templates used if an ajax param is present in the URL request. 
-
-^ If the ajax param is not present, the full page is rendered. If not, then only the core artwork of the node is sent back.
-
----
-
-# How?
-## Drupal 
-
-```php
-function laphams_theme_get_quote_nodes_by_term_id($tid) {
-  $query = db_select('taxonomy_index', 't');
-  $query->addTag('node_access');
-  $query->join('node', 'n', 'n.nid = t.nid');
-
-  $query->condition('tid', $tid);
-  $query->condition('type', 'quote');
-
-  $query->addField('t', 'nid');
-  $query->addField('t', 'tid');
-  $nids = $query->execute()->fetchCol();
-
-  laphams_theme_add_ajax_vars($nids, "quote_nids");
-}
-```
-
----
-
-```php
-function laphams_theme_add_ajax_vars($nids, $array_name) {
-  $node_urls = array();
-  $options = array('absolute' => TRUE);
-  foreach ($nids as $nid) {
-      $node_urls[] = url('node/' . $nid, $options);
-  }
-  $js_string = 'var ' . $array_name . ' = ' . json_encode($node_urls) . ';';
-  $inline_options = array(
-  	'type' => 'inline', 
-  	'group' => JS_THEME, 
-  	'defer' => TRUE, );
-
-  drupal_add_js($js_string, $inline_options);
-}
-```
-result:
-
-```javascript
-var widescreen_artwork_nids = 
-["http://laphams.local/time/art/time-lord-byrons-dream",
-"http://laphams.local/time/art/time-acropolis-photograph"…];
-```
-
----
-
-# How?
-## WYSIWYG Shortcode Insert
-
-* Shortcode inserts HTML pattern:
-
-```html
-<a href="" data-replace-widescreen="true"></a>
-```
-
----
-
-# How?
-## JavaScript
-
-```javascript
-$("a[data-replace-widescreen]").each(function(index) {
-  if (widescreen_artwork_nids.length > 0) {
-    loadArtworkFragment(
-    	getRandomUniqueNodeId(widescreen_artwork_nids), $(this)
-    );
-  }
-});
-
-function loadArtworkFragment(nodeUrl, target) {
-  window.art_bool = true;
-  console.log("nodeURL: ", nodeUrl);
-  $.ajax({
-    url: nodeUrl,
-    type: 'GET',
-    data: {'is_ajax': 1},
-    cache: false,
-    success: function (response) {
-      $(target).children().remove();
-      $(target).append(response);
-    },
-    complete: function () {
-      console.log('ajax done');
-      if(window.apropo){
-        renderApropos();
-        aproposFade();
-      };
-    },
-    error: function() {
-      console.log('ajax error');
-    }
-  });
-
-}
-```
-^ If we have values in the widescreen\_artwork\_nids array, then load a piece of random artwork
-
----
-
-# How?
-## Drupal
-
-```php
-function laphams_theme_preprocess_html(&$variables, $hook) {
-  if (isset($_GET['is_ajax']) && $_GET['is_ajax'] == 1) {
-      $variables['theme_hook_suggestions'][] = 'html__embed';
-    }
-}
-
-function laphams_theme_preprocess_page(&$variables) {
-	if (isset($_GET['is_ajax']) && $_GET['is_ajax'] == 1) {
-  	$variables['theme_hook_suggestions'][] = 'page__embed';
-	}
-}
-```
-
----
-
-### html--embed.tpl.php
-
-```php
-<?php print $page; ?>
-```
-
-### page--embed.tpl.php
-
-```php
-<?php print render($page['content']); ?>
-```
-
----
-
-# Example
-## Loading Views via Ajax
-
-* Views have a handy “Use Ajax” option
-* View can be accessed via direct hyperlink, or loaded via Ajax
-
----
-
-[image of View, with Ajax option]
-
----
-
-[image of Views page]
-
----
-
-# How?
-## JavaScript
-
-```javascript
-function loadEssaysView() {
- $.ajax({
-   url: 'http://laphams.local/views/ajax',
-   type: 'post',
-   data: {
-     view_name: 'essay_issue_content',
-     view_display_id: 'test', //your display id
-   },
-   dataType: 'json',
-   success: function (response) {
-     if (response[1] !== undefined) {
-       var viewHtml = response[1].data;
-       $('#essaysDestination').html(viewHtml);
-       //Drupal.attachBehaviors(); //check if you need this.
-     }
-   }
- });
-}
-```
-^ In this situation we target the URL /views/ajax
-We pass in the view name, and the display id. Our success handler tells us where to put the response.
-
-
-

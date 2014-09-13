@@ -402,8 +402,9 @@ function computer_services_preprocess_html(&$variables) {
 
 ---
 
-* We worked backwards here, which is harder
-* Like mobile-first RWD, Progressive Enhancement is easier when you’re adding complexity gradually
+## We worked backwards here, which is harder
+
+^ Like mobile-first RWD, Progressive Enhancement is easier when you’re adding complexity gradually
 
 ---
 
@@ -420,9 +421,23 @@ function computer_services_preprocess_html(&$variables) {
 
 ---
 
+```html
+<a href="/node/1">Append</a>
+<a href="/node/3">Replace</a>
+```
+
+---
+
 # 2. Site with ajaxinclude.js
 
 ^ You can see we are loading the content but the header and footer are included
+
+---
+
+```html
+<a data-interaction data-after="/node/1?is_ajax=1" href="/node/1">Append</a>
+<a data-interaction data-replace="/node/3?is_ajax=1" href="/node/3">Replace</a>
+```
 
 ---
 
@@ -433,6 +448,12 @@ function computer_services_preprocess_html(&$variables) {
 ---
 
 # 4. Loading a view via Ajax
+
+---
+
+```html
+<a data-views href="/articles">View</a>
+```
 
 ---
 
